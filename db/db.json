@@ -1,0 +1,18 @@
+{
+  "users": [
+    {
+      "id": "0998",
+      "fname": "Dilshod",
+      "lname": "Urozov",
+      "age": 21,
+      "gender": "male"
+    },
+    {
+      "id": "8ee2",
+      "fname": "",
+      "lname": "",
+      "age": 20,
+      "gender": "male"
+    }
+  ]
+}
