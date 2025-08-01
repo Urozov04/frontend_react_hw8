@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import useFetch from "../hooks/useFetch";
 import { api } from "../api";
 import { useGetValues } from "../hooks/useGetValues";
@@ -13,20 +13,31 @@ const initialState = {
 const Users = () => {
   const { data } = useFetch("users");
   const { formData, handleChange, setFormData } = useGetValues(initialState);
+  const [editingItem, setEditingItem] = useState(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newUser = {
-      ...formData,
-      age: Number(formData.age),
-    };
-    api.post("users", newUser);
-    setFormData(initialState); // reset form
+
+    formData.age = Number(formData.age)
+
+    if(editingItem) {
+      api.put(`users/${editingItem.id}`, formData);
+      setEditingItem(null)
+    }
+    else {
+      api.post("users", newUser);
+    }
+
   };
 
   const handleDelete = (id) => {
     api.delete(`users/${id}`);
   };
+
+  const handleUpdate = (item) => {
+    setEditingItem(item);
+    setFormData(item)
+  }
 
   return (
     <>
@@ -81,7 +92,7 @@ const Users = () => {
           type="submit"
           className="border bg-green-500 text-white px-4 py-2 m-2"
         >
-          Submit
+          {editingItem ? "save" : "submit"}
         </button>
       </form>
 
@@ -126,6 +137,9 @@ const Users = () => {
                     className="text-red-500 hover:underline"
                   >
                     Delete
+                  </button>
+                  <button onClick={() => handleUpdate(item)}>
+                    Update
                   </button>
                 </td>
               </tr>
