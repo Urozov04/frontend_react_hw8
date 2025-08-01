@@ -96,7 +96,7 @@ const Users = () => {
         </button>
       </form>
 
-      <div className="container mx-auto w-[60%] border mb-5">
+      <div className="container mx-auto w-[60%] mt-5 mb-5">
         <table className="w-full max-w-[1000px] mx-auto shadow-[0_22px_70px_4px_rgba(0,0,0,0.56)] rounded-[10px] overflow-hidden border-b-[green]">
           <thead className="bg-[#00a37a] text-white ">
             <tr>
